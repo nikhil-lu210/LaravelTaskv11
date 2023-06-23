@@ -10,7 +10,7 @@ class Subscriber extends Model
 {
     use HasFactory, Relations;
 
-    protected $filllable = [
+    protected $fillable = [
         'website_id',
         'name',
         'email'

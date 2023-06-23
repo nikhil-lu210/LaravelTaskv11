@@ -10,7 +10,7 @@ class Website extends Model
 {
     use HasFactory, Relations;
 
-    protected $filllable = [
+    protected $fillable = [
         'name',
         'url'
     ];
