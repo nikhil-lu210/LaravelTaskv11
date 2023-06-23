@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait Relations
 {
-    public function subscriber(): HasMany 
+    public function subscribers(): HasMany 
     {
         return $this->hasMany(Subscriber::class);
     }
 
-    public function post(): HasMany 
+    public function posts(): HasMany 
     {
         return $this->hasMany(Post::class);
     }
