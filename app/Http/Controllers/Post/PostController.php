@@ -23,7 +23,11 @@ class PostController extends Controller
         $post = Post::create($request->all());
 
         // Fetch subscribers of the website
-        $website = Website::findOrFail($post->website_id);
+        $website = Website::select(['id'])->with([
+            'subscribers' => function($query) {
+                $query->select(['website_id', 'name', 'email']);
+            }
+        ])->findOrFail($post->website_id);
         $subscribers = $website->subscribers;
 
         // Send email to each subscriber
