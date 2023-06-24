@@ -8,7 +8,7 @@
 - run migration `php artisan migrate`
 - set mail configurations
 - set QUEUE_CONNECTION=database
-- run `php artisan queue:work`
+- run `php artisan queue:work --tries`
 
 ## API Routes
 - `/api/website/store` (POST request with 'name', 'url')
