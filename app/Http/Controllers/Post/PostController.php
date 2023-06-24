@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Website\Website;
 use App\Mail\NewPostNotification;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendPostEmailSubscriberJob;
 use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
@@ -31,11 +32,14 @@ class PostController extends Controller
         $subscribers = $website->subscribers;
 
         // Send email to each subscriber
-        $subscribers->chunk(100, function ($subscribers) use ($post) {
-            foreach ($subscribers as $subscriber) {
-                Mail::to($subscriber->email)->queue(new NewPostNotification($post));
-            }
-        });
+        foreach ($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->queue(new NewPostNotification($post));
+        }
+        // $subscribers->chunk(10, function ($subscribers) use ($post) {
+        //     foreach ($subscribers as $subscriber) {
+        //         dispatch(new SendPostEmailSubscriberJob($subscriber, $post));
+        //     }
+        // });
 
         // Return a JSON response
         return response()->json([
