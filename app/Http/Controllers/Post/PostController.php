@@ -27,9 +27,11 @@ class PostController extends Controller
         $subscribers = $website->subscribers;
 
         // Send email to each subscriber
-        foreach ($subscribers as $subscriber) {
-            Mail::to($subscriber->email)->queue(new NewPostNotification($post));
-        }
+        $subscribers->chunk(100, function ($subscribers) use ($post) {
+            foreach ($subscribers as $subscriber) {
+                Mail::to($subscriber->email)->queue(new NewPostNotification($post));
+            }
+        });
 
         // Return a JSON response
         return response()->json([

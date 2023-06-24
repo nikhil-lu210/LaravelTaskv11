@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('website_id')->constrained();
             $table->string('name');
             $table->string('email');
+
+            $table->unique(['website_id', 'email'], 'website_email_unique');
             $table->timestamps();
         });
     }
