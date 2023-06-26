@@ -6,7 +6,7 @@
 - Run `php artisan key:generate`
 - set DB_DATABASE
 - run migration `php artisan m:fresh --seed`
-- set mail configurations
+- set mail configurations (You can use Mailtrap for Testing)
 - set QUEUE_CONNECTION=database
 - run `php artisan queue:work --tries`
 
